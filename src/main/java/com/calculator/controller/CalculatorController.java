@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import com.calculator.exception.DivisionByZeroException;
 
 import com.calculator.Service.CalculatorService;
 
@@ -57,7 +58,7 @@ public class CalculatorController {
         try {
             int result = calculatorService.divide(num1, num2);
             return ResponseEntity.ok(num1 + " / " + num2 + " = " + result);
-        } catch (IllegalArgumentException e) {
+        } catch (DivisionByZeroException e) {
             return ResponseEntity.badRequest().body("Ошибка: деление на 0");
         }
     }
